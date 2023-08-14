@@ -6,27 +6,27 @@ import skypro.emploeeBook.exceptions.EmployeeAlreadyAddedException;
 import skypro.emploeeBook.exceptions.EmployeeNotFoundException;
 import skypro.emploeeBook.exceptions.EmployeeStorageIsFullException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private List<Employee> employees;
+    public EmployeeServiceImpl() {
+        this.employees = new HashMap<>();
+    }
+
+    private final Map<String, Employee> employees;
     private static final int EMPLOYEES_SIZE = 3;
 
-    public EmployeeServiceImpl() {
-        this.employees = new ArrayList<>();
-    }
 
     @Override
     public Employee addEmployee(String firstName, String lastName) {
         if (employees.size() < EMPLOYEES_SIZE) {
             Employee employee = new Employee(firstName, lastName);
-            if (employees.contains(employee)) {
+            String employeeKey = generateKey(firstName, lastName);
+            if (employees.containsKey(employeeKey)) {
                 throw new EmployeeAlreadyAddedException();
             }
-            employees.add(employee);
+            employees.put(employeeKey, employee);
             return employee;
         } else {
             throw new EmployeeStorageIsFullException();
@@ -36,7 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.remove(employee)) {
+        String employeeKey = generateKey(firstName, lastName);
+        if (!employees.remove(employeeKey, employee)) {
             throw new EmployeeNotFoundException();
         }
         return employee;
@@ -45,13 +46,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.contains(employee)) {
+        String employeeKey = generateKey(firstName, lastName);
+        if (!employees.containsKey(employeeKey)) {
             throw new EmployeeNotFoundException();
         }
         return employee;
     }
-  @Override
+
+    @Override
     public Collection<Employee> printAll() {
-        return employees;
+        return employees.values();
+    }
+
+    private String generateKey(String firstName, String lastKey) {
+        return firstName + lastKey;
     }
 }
