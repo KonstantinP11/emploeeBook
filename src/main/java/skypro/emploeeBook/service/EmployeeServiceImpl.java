@@ -19,9 +19,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName, int department, double salary) {
         if (employees.size() < EMPLOYEES_SIZE) {
-            Employee employee = new Employee(firstName, lastName);
+            Employee employee = new Employee(firstName, lastName, department, salary);
             String employeeKey = generateKey(firstName, lastName);
             if (employees.containsKey(employeeKey)) {
                 throw new EmployeeAlreadyAddedException();
@@ -34,8 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee removeEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee removeEmployee(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName, department, salary);
         String employeeKey = generateKey(firstName, lastName);
         if (!employees.remove(employeeKey, employee)) {
             throw new EmployeeNotFoundException();
@@ -44,8 +44,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee findEmployee(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName, department, salary);
         String employeeKey = generateKey(firstName, lastName);
         if (!employees.containsKey(employeeKey)) {
             throw new EmployeeNotFoundException();
