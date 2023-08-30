@@ -1,5 +1,7 @@
 package skypro.emploeeBook.dto;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Employee {
@@ -9,8 +11,8 @@ public class Employee {
     private double salary;
 
     public Employee(String firthName, String lastName, int department, double salary) {
-        this.firthName = firthName;
-        this.lastName = lastName;
+        this.firthName = StringUtils.capitalize(firthName);
+        this.lastName = StringUtils.capitalize(lastName);
         this.department = department;
         this.salary = salary;
     }
