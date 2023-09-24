@@ -1,9 +1,6 @@
 package skypro.emploeeBook.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import skypro.emploeeBook.dto.Employee;
 import skypro.emploeeBook.service.DepartmentService;
 
@@ -40,4 +37,9 @@ public class DepartmentController {
     public Map<Integer, List<Employee>> findAll() {
         return departmentService.findAll();
     }
+
+//        @PathVariable("")
+//    @GetMapping("/{id}/employees", params = "department")
+
+
 }
