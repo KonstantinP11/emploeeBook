@@ -20,8 +20,8 @@ class EmployeeServiceImplTest {
 
     @Test
     void addEmployee_ShouldAddEmployeeAndReturnEmployee() {
-        Employee result = underTest.addEmployee(employeeTest.getFirthName(), employeeTest.getLastName(),
-                employeeTest.getDepartment(), employeeTest.getSalary());
+        Employee result = underTest.addEmployee(employeeTest.getFirthName(),
+                employeeTest.getLastName(), employeeTest.getDepartment(), employeeTest.getSalary());
         assertTrue(underTest.printAll().contains(employeeTest));
         assertEquals(employeeTest, result);
     }
@@ -57,7 +57,8 @@ class EmployeeServiceImplTest {
 
     @Test
     void removeEmployee_ShouldThrowWhenEmployeeNotInMap() {
-        assertThrows(EmployeeNotFoundException.class, () -> underTest.removeEmployee(employeeTest.getFirthName(), employeeTest.getLastName(),
+        assertThrows(EmployeeNotFoundException.class, () -> underTest.removeEmployee(
+                employeeTest.getFirthName(), employeeTest.getLastName(),
                 employeeTest.getDepartment(), employeeTest.getSalary()));
     }
 
@@ -88,7 +89,7 @@ class EmployeeServiceImplTest {
         underTest.addEmployee(employee.getFirthName(), employee.getLastName(),
                 employee.getDepartment(), employee.getSalary());
         Collection<Employee> result = underTest.printAll();
-        assertTrue(result.containsAll(List.of(employeeTest,employee)));
+        assertTrue(result.containsAll(List.of(employeeTest, employee)));
     }
 
     @Test
