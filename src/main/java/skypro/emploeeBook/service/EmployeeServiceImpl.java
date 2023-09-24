@@ -64,8 +64,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Collection<Employee> printAll() {
         return employees.values();
     }
-@Override
-public String generateKey(String firstName, String lastKey) {
+
+    private String generateKey(String firstName, String lastKey) {
         return firstName + lastKey;
     }
 

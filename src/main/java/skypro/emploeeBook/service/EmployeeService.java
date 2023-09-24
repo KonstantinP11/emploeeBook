@@ -12,6 +12,4 @@ public interface EmployeeService {
     Employee findEmployee(String firstName, String lastName, int department, double salary);
 
     Collection<Employee> printAll();
-
-    String generateKey(String firstName, String lastKey);
 }
